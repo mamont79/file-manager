@@ -1,0 +1,21 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "module": "commonjs",
+  "description": "file manager",
+  "main": "src/file-manager.js",
+  "scripts": {
+    "start": "node src/file-manager.js",
+    "test": "node src/file-manager.js -- --username=mamont79"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamont79/file-manager.git"
+  },
+  "author": "Pavel Dalhou",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mamont79/file-manager/issues"
+  },
+  "homepage": "https://github.com/mamont79/file-manager#readme"
+}
