@@ -16,6 +16,7 @@ import { cpCommand } from "./commads/cp-command.js";
 import { rmCommand } from "./commads/rm-command.js";
 import { mvCommand } from "./commads/mv-command.js";
 import { hashCommand } from "./commads/hash-command.js";
+import { compressCommand } from "./commads/compress-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -67,6 +68,8 @@ const executionCommand = async (command) => {
     await rmCommand(currentWorkingDir, cmdArr[1]);
   } else if (cmd == "hash") {
     await hashCommand(currentWorkingDir, cmdArr[1]);
+  } else if (cmd == "compress") {
+    await compressCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
   }
 };
 

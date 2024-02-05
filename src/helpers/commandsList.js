@@ -9,8 +9,8 @@ export const commandsList = {
   mv: 2,
   rm: 1,
   hash: 1,
-  compress: 1,
-  decompress: 1,
+  compress: 2,
+  decompress: 2,
   os: 1,
   ".exit": 0,
 };
