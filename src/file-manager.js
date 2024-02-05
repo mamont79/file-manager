@@ -18,6 +18,7 @@ import { mvCommand } from "./commads/mv-command.js";
 import { hashCommand } from "./commads/hash-command.js";
 import { compressCommand } from "./commads/compress-command.js";
 import { decompressCommand } from "./commads/decompress-command.js";
+import { osCommand } from "./commads/os-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -76,6 +77,8 @@ const executionCommand = async (command) => {
     await compressCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
   } else if (cmd == "decompress") {
     await decompressCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+  } else if (cmd == "os") {
+    await osCommand(cmdArr[1]);
   } else if (cmd == ".exit") {
     operationCode = 0;
     rl.close();
@@ -94,9 +97,9 @@ rl.on("line", (line) => {
   executionCommand(line).then(regularMessage()).catch();
 })
   .on("close", () => {
-    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+    console.log(`\nThank you for using File Manager, ${userName}, goodbye!`);
     rl.close();
   })
   .on("exit", () => {
-    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+    console.log(`\nThank you for using File Manager, ${userName}, goodbye!`);
   });
