@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { createHash } from "crypto";
+import { checkDirectory } from "../helpers/checkDir.js";
 
 export const hashCommand = async (currentPath, fileName) => {
   let fileForHashCalc = fileName;
@@ -9,15 +10,25 @@ export const hashCommand = async (currentPath, fileName) => {
     fileForHashCalc = path.join(currentPath, fileName);
   }
 
-  const hashOfFile = createHash("sha256");
-  const fileHashStream = fs.createReadStream(fileForHashCalc);
+  const check = checkDirectory(fileForHashCalc);
 
-  fileHashStream
-    .on("data", (data) => {
-      hashOfFile.update(data);
-    })
-    .on("end", () => {
-      const calculatedHash = hashOfFile.digest("hex");
-      console.log(`hash of file is:   ${calculatedHash}`);
-    });
+  if (!check) {
+    console.log(`Can't find ${fileForHashCalc}. Try again`);
+  } else {
+    try {
+      const hashOfFile = createHash("sha256");
+      const fileHashStream = fs.createReadStream(fileForHashCalc);
+
+      fileHashStream
+        .on("data", (data) => {
+          hashOfFile.update(data);
+        })
+        .on("end", () => {
+          const calculatedHash = hashOfFile.digest("hex");
+          console.log(`hash of file is:   ${calculatedHash}`);
+        });
+    } catch {
+      console.log("Operation failed");
+    }
+  }
 };
