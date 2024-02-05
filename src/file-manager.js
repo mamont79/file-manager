@@ -58,9 +58,11 @@ regularMessage();
 
 rl.on("line", (line) => {
   executionCommand(line).then(regularMessage()).catch();
-});
-
-rl.on("exit", () => {
-  console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
-  rl.close();
-});
+})
+  .on("close", () => {
+    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+    rl.close();
+  })
+  .on("exit", () => {
+    console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+  });
