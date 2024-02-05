@@ -8,6 +8,7 @@ import { getUserName } from "./helpers/getUserName.js";
 import { commandsList } from "./helpers/commandsList.js";
 import { upCommand } from "./commads/up-command.js";
 import { cdCommand } from "./commads/cd-command.js";
+import { lsCommand } from "./commads/ls-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -35,6 +36,8 @@ const executionCommand = async (command) => {
     currentWorkingDir = upCommand(currentWorkingDir);
   } else if (cmd == "cd") {
     currentWorkingDir = cdCommand(currentWorkingDir, cmdArr[1]);
+  } else if (cmd == "ls") {
+    await lsCommand(currentWorkingDir);
   }
 };
 

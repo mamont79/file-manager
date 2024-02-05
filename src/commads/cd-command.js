@@ -1,9 +1,5 @@
 import path from "path";
-import fs from "fs";
-
-const checkDirectory = (path) => {
-  return fs.existsSync(path);
-};
+import { checkDirectory } from "../helpers/checkDir.js";
 
 export const cdCommand = (currPath, newPath) => {
   let newDir = newPath;
