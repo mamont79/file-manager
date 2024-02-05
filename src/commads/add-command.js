@@ -3,7 +3,12 @@ import fs from "fs/promises";
 import { checkDirectory } from "../helpers/checkDir.js";
 
 export const addCommand = async (currentPath, fileName) => {
-  const newFileName = path.join(currentPath, fileName);
+  let newFileName = fileName;
+
+  if (!path.isAbsolute(newFileName)) {
+    newFileName = path.join(currentPath, fileName);
+  }
+
   const check = checkDirectory(newFileName);
 
   if (check) {

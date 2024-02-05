@@ -11,6 +11,8 @@ import { cdCommand } from "./commads/cd-command.js";
 import { lsCommand } from "./commads/ls-command.js";
 import { catCommand } from "./commads/cat-command.js";
 import { addCommand } from "./commads/add-command.js";
+import { rnCommand } from "./commads/rn-command.js";
+import { cpCommand } from "./commads/cp-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -27,7 +29,13 @@ const regularMessage = () => {
 };
 
 const executionCommand = async (command) => {
-  const cmdArr = command.split(" ");
+  const receivedCmd = command.split(" ");
+  const cmdArr = [];
+
+  for (let i = 0; i < receivedCmd.length; i++) {
+    if (receivedCmd[i]) cmdArr.push(receivedCmd[i]);
+  }
+
   const cmd = cmdArr[0];
 
   if (commandsList[cmd] !== cmdArr.length - 1) {
@@ -45,6 +53,10 @@ const executionCommand = async (command) => {
     await catCommand(currentWorkingDir, cmdArr[1]);
   } else if (cmd == "add") {
     await addCommand(currentWorkingDir, cmdArr[1]);
+  } else if (cmd == "rn") {
+    await rnCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+  } else if (cmd == "cp") {
+    await cpCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
   }
 };
 

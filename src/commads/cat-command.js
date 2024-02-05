@@ -3,7 +3,11 @@ import fs from "fs";
 import { checkDirectory } from "../helpers/checkDir.js";
 
 export const catCommand = async (dirPath, filePath) => {
-  const fileToRead = path.join(dirPath, filePath);
+  let fileToRead = filePath;
+
+  if (!path.isAbsolute(fileToRead)) {
+    fileToRead = path.join(dirPath, filePath);
+  }
 
   const check = checkDirectory(fileToRead);
 
