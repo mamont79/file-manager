@@ -9,6 +9,7 @@ import { commandsList } from "./helpers/commandsList.js";
 import { upCommand } from "./commads/up-command.js";
 import { cdCommand } from "./commads/cd-command.js";
 import { lsCommand } from "./commads/ls-command.js";
+import { catCommand } from "./commads/cat-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -16,7 +17,8 @@ const workigDir = process.cwd();
 const homeDir = os.homedir();
 const userName = getUserName();
 
-let currentWorkingDir = homeDir;
+// let currentWorkingDir = homeDir;
+let currentWorkingDir = workigDir;
 
 const regularMessage = () => {
   console.log(`\nYou are currently in  ==>  ${currentWorkingDir}`);
@@ -38,6 +40,8 @@ const executionCommand = async (command) => {
     currentWorkingDir = cdCommand(currentWorkingDir, cmdArr[1]);
   } else if (cmd == "ls") {
     await lsCommand(currentWorkingDir);
+  } else if (cmd == "cat") {
+    await catCommand(currentWorkingDir, cmdArr[1]);
   }
 };
 
