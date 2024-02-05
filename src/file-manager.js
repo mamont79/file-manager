@@ -13,7 +13,7 @@ import { catCommand } from "./commads/cat-command.js";
 import { addCommand } from "./commads/add-command.js";
 import { rnCommand } from "./commads/rn-command.js";
 import { cpCommand } from "./commads/cp-command.js";
-
+import { rmCommand } from "./commads/rm-command.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
 const workigDir = process.cwd();
@@ -57,6 +57,8 @@ const executionCommand = async (command) => {
     await rnCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
   } else if (cmd == "cp") {
     await cpCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+  } else if (cmd == "rm") {
+    await rmCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
   }
 };
 
