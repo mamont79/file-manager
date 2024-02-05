@@ -10,6 +10,7 @@ import { upCommand } from "./commads/up-command.js";
 import { cdCommand } from "./commads/cd-command.js";
 import { lsCommand } from "./commads/ls-command.js";
 import { catCommand } from "./commads/cat-command.js";
+import { addCommand } from "./commads/add-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -42,6 +43,8 @@ const executionCommand = async (command) => {
     await lsCommand(currentWorkingDir);
   } else if (cmd == "cat") {
     await catCommand(currentWorkingDir, cmdArr[1]);
+  } else if (cmd == "add") {
+    await addCommand(currentWorkingDir, cmdArr[1]);
   }
 };
 
