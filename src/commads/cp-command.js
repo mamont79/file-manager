@@ -22,7 +22,9 @@ export const cpCommand = async (currentPath, fileName, renamedFileName) => {
     console.log(`\nFile ${renamedFileName} is already exist`);
   } else {
     try {
-      fs.createReadStream(fileToCopy).pipe(fs.createWriteStream(newFileName));
+      const readStream = fs.createReadStream(fileToCopy);
+      const writeStream = fs.createWriteStream(newFileName);
+      readStream.pipe(writeStream);
     } catch {
       console.log("Operation failed");
     }
