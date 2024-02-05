@@ -17,6 +17,7 @@ import { rmCommand } from "./commads/rm-command.js";
 import { mvCommand } from "./commads/mv-command.js";
 import { hashCommand } from "./commads/hash-command.js";
 import { compressCommand } from "./commads/compress-command.js";
+import { decompressCommand } from "./commads/decompress-command.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
@@ -26,10 +27,13 @@ const userName = getUserName();
 
 // let currentWorkingDir = homeDir;
 let currentWorkingDir = workigDir;
+let operationCode = 1;
 
 const regularMessage = () => {
-  console.log(`\nYou are currently in  ==>  ${currentWorkingDir}`);
-  console.log(`I wait for your command: \n`);
+  if (operationCode == 1) {
+    console.log(`\nYou are currently in  ==>  ${currentWorkingDir}`);
+    console.log(`I wait for your command: \n`);
+  }
 };
 
 const executionCommand = async (command) => {
@@ -70,6 +74,11 @@ const executionCommand = async (command) => {
     await hashCommand(currentWorkingDir, cmdArr[1]);
   } else if (cmd == "compress") {
     await compressCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+  } else if (cmd == "decompress") {
+    await decompressCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+  } else if (cmd == ".exit") {
+    operationCode = 0;
+    rl.close();
   }
 };
 
