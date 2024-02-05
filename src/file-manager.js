@@ -14,6 +14,8 @@ import { addCommand } from "./commads/add-command.js";
 import { rnCommand } from "./commads/rn-command.js";
 import { cpCommand } from "./commads/cp-command.js";
 import { rmCommand } from "./commads/rm-command.js";
+import { mvCommand } from "./commads/mv-command.js";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const commandsDir = path.join(__dirname, "commands");
 const workigDir = process.cwd();
@@ -58,7 +60,10 @@ const executionCommand = async (command) => {
   } else if (cmd == "cp") {
     await cpCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
   } else if (cmd == "rm") {
-    await rmCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+    await rmCommand(currentWorkingDir, cmdArr[1]);
+  } else if (cmd == "mv") {
+    await mvCommand(currentWorkingDir, cmdArr[1], cmdArr[2]);
+    await rmCommand(currentWorkingDir, cmdArr[1]);
   }
 };
 
