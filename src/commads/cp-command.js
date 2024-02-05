@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs/promises";
+import fs from "fs";
 import { checkDirectory } from "../helpers/checkDir.js";
 
 export const cpCommand = async (currentPath, fileName, renamedFileName) => {
@@ -14,14 +14,15 @@ export const cpCommand = async (currentPath, fileName, renamedFileName) => {
   }
 
   const check = checkDirectory(fileToCopy);
+  const checkCopy = checkDirectory(newFileName);
 
   if (!check) {
     console.log(`\nFile ${fileName} is is not exist`);
+  } else if (checkCopy) {
+    console.log(`\nFile ${renamedFileName} is already exist`);
   } else {
     try {
-      await fs
-        .createReadStream(fileToCopy)
-        .pipe(fs.createWriteStream(newFileName));
+      fs.createReadStream(fileToCopy).pipe(fs.createWriteStream(newFileName));
     } catch {
       console.log("Operation failed");
     }
