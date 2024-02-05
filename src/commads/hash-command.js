@@ -23,9 +23,12 @@ export const hashCommand = async (currentPath, fileName) => {
         .on("data", (data) => {
           hashOfFile.update(data);
         })
+        .on("close", () => {
+          fileHashStream.close();
+        })
         .on("end", () => {
           const calculatedHash = hashOfFile.digest("hex");
-          console.log(`hash of file is:   ${calculatedHash}`);
+          console.log(`Besides, hash of file is:   ${calculatedHash}`);
         });
     } catch {
       console.log("Operation failed");

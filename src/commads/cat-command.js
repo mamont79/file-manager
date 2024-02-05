@@ -22,8 +22,6 @@ export const catCommand = async (dirPath, filePath) => {
       })
       .on("close", (err) => {
         console.log("\nAll the data in the file has been read \n");
-        console.log(`\nYou are currently in  ==>  ${dirPath}`);
-        console.log(`I wait for your command: \n`);
       });
   } else {
     console.log("No such file has been found. Try again");

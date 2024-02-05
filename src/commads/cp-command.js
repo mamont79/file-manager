@@ -21,12 +21,17 @@ export const cpCommand = async (currentPath, fileName, renamedFileName) => {
   } else if (checkCopy) {
     console.log(`\nFile ${renamedFileName} is already exist`);
   } else {
-    try {
-      const readStream = fs.createReadStream(fileToCopy);
-      const writeStream = fs.createWriteStream(newFileName);
-      readStream.pipe(writeStream);
-    } catch {
-      console.log("Operation failed");
+    const checkNewDir = checkDirectory(path.dirname(renamedFileName));
+    if (!checkNewDir) {
+      console.log("No such dirrectory. Try again");
+    } else {
+      try {
+        const readStream = fs.createReadStream(fileToCopy);
+        const writeStream = fs.createWriteStream(newFileName);
+        readStream.pipe(writeStream);
+      } catch {
+        console.log("Operation failed");
+      }
     }
   }
 };

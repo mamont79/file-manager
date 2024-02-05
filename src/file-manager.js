@@ -20,14 +20,12 @@ import { compressCommand } from "./commads/compress-command.js";
 import { decompressCommand } from "./commads/decompress-command.js";
 import { osCommand } from "./commads/os-command.js";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const commandsDir = path.join(__dirname, "commands");
 const workigDir = process.cwd();
 const homeDir = os.homedir();
 const userName = getUserName();
 
-// let currentWorkingDir = homeDir;
-let currentWorkingDir = workigDir;
+let currentWorkingDir = homeDir;
+// let currentWorkingDir = workigDir;
 let operationCode = 1;
 
 const regularMessage = () => {
@@ -83,6 +81,7 @@ const executionCommand = async (command) => {
     operationCode = 0;
     rl.close();
   }
+  regularMessage();
 };
 
 const rl = readline.createInterface({
@@ -94,7 +93,7 @@ console.log(`Welcome to the File Manager, ${userName}!`);
 regularMessage();
 
 rl.on("line", (line) => {
-  executionCommand(line).then(regularMessage()).catch();
+  executionCommand(line);
 })
   .on("close", () => {
     console.log(`\nThank you for using File Manager, ${userName}, goodbye!`);
