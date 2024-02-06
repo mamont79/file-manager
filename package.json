@@ -1,12 +1,12 @@
 {
   "name": "file-manager",
   "version": "1.0.0",
-  "module": "commonjs",
+  "type": "module",
   "description": "file manager",
   "main": "src/file-manager.js",
   "scripts": {
     "start": "node src/file-manager.js",
-    "test": "node src/file-manager.js -- --username=mamont79"
+    "test": "node src/file-manager.js --username=mamont79"
   },
   "repository": {
     "type": "git",
