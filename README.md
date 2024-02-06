@@ -14,7 +14,7 @@ rn oldFileName newFileName: Renames the file with the old name to the new name i
 
 cp sourceFileName destinationFileName: Copies the file with the source name to the destination name in the current directory.
 
-mv sourceFileName destinationFileName: Moves the file with the source name to the destination name in the current directory.
+mv sourceFileName destinationDir: Moves the file with the source name to the new directory.
 
 rm <fileName>: Removes the file with the given name from the current directory.
 
